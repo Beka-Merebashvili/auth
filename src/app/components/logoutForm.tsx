@@ -1,6 +1,8 @@
+import { logout } from "../actions";
+
 const LogiutForm = () => {
     return ( 
-        <form action="">
+        <form action={logout}>
             <button>logout</button>
         </form>
      );
