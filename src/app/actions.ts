@@ -1,6 +1,7 @@
 "use server";
 import { sessionOptions, SessionData, defaultSession } from "@/app/lib";
 import { getIronSession } from "iron-session";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -47,3 +48,14 @@ export const logout = async () => {
   session.destroy();
   redirect("/");
 };
+
+
+export const changePremium = async () => {
+  const session = await getSession();
+
+  isPro = !session.isPro;
+  session.isPro = isPro;
+  await session.save();
+  revalidatePath("/profile");
+};
+
