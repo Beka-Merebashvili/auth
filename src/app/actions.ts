@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 let username = "beka";
+let password = "12345"
 let isPro = true;
 
 export const getSession = async () => {
@@ -30,12 +31,13 @@ export const login = async (
   // CHECK USER IN THE DB
   // const user = await db.getUser({username,password})
 
-  if (formUsername !== username) {
+  if (formUsername !== username || formPassword !== password) {
     return { error: "Username or password is not correct" };
   }
 
   session.userId = "1";
   session.username = formUsername;
+  session.password = formPassword
   session.isPro = isPro;
   session.isLoggedIn = true;
 
